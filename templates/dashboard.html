@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block home_active %}
+class="active-link"
+{% endblock home_active %}
+
+{% block content %}
+
+
+    <div class="dashboard-container">
+        {% if not is_applied %}
+        <div class="card-msg">
+            <h3>You dont'have a Debit Card. Apply for Debit Card now! <a style="color: royalblue;" href="{% url 'transaction:apply_card' bank_account.account_number %}">Apply Now</a></h3>
+        </div>
+        {% endif %}
+        
+        <div class="balance-transfer-container">
+            <div class="sub-container">
+                <div class="account-balance">
+                    <div class="balance-title">Account Balance</div>
+                    <div class="balance-amount">PKR {{ bank_account.balance | intcomma }}</div>
+                </div>
+                <div class="btn-tabs">
+                    <a class="transfer-button" href="{% url 'transaction:make_payment' bank_account.account_number %}">Transfer</a>
+                    <a class="transfer-button request-btn" href="{% url 'transaction:request_money' %}">Request</a>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div>
+                    <div class="balance-title">Full Name</div>
+                    <div class="balance-amount">{{ bank_account.full_name }}</div>
+                </div>
+                <div>
+                    <div class="balance-title">Account Number</div>
+                    <div class="balance-amount">{{ bank_account.account_number }}</div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="transaction-history">
+            <h2>Transaction History</h2>
+            <div class="transaction-total">
+                <section>
+                    <p class="credit">Credit Amount</p>
+                    <p>PKR {{ credit_total }}</p>
+                </section>
+                <section>
+                    <p class="debit">Debit Amount</p>
+                    <p>PKR {{ debit_total }}</p>
+                </section>
+                
+                
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S#</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    {% for item in trx_qs %}
+                    {% if item.from_acc == bank_account or item.to_acc == bank_account %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.from_acc.full_name }}</td>
+                        <td>{{ item.to_acc.full_name }}</td>
+                        
+                        {% if item.to_acc == bank_account %}
+                        <td>Credit</td>
+                        {% else %}
+                        <td>{{ item.trx_type }}</td> {% endif %}
+                        
+                        <td>PKR {{ item.amount | intcomma }}</td>
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                    <tr>
+                        <td style="text-align: center;" colspan="6">No Transaction Recorded</td>
+                    </tr>
+                    {% endfor %}
+   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

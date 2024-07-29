@@ -1,0 +1,17 @@
+ {% extends 'base.html' %} 
+ {% load static %}       
+         
+         {% block content %}
+            <div class="form-container">
+              
+                    <h2>Confirm Email</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <button type="submit">Confirm Email</button>
+                    </form>
+                    
+                </div>
+            </div>
+     {% endblock %}

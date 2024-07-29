@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block card_active %}
+class="active-link"
+{% endblock %}
+
+{% block content %}
+    {% if card %}
+    <div class="dashboard-container">
+        {% if card.is_reviewed %}
+        <div class="body manage-card">
+            <h2>Manage Card</h2>
+            <div class="container">
+                {% if card.is_active %}
+                <p class="active-card-msg">Active</p> {% else %}
+                <p class="in-active-card-msg">In-Active</p> {% endif %}
+                <div class="credit-card">
+                    <div class="card-chip"></div>
+                    
+                    <div class="card-number">{{ card.card_number|slice:"0:4" }}-{{ card.card_number|slice:"4:8" }}-{{ card.card_number|slice:"8:12" }}-{{ card.card_number|slice:"12:16" }}
+                    </div>
+                    <div class="card-name">{{ card.card_name }}</div>
+                    <div class="card-expiry">{{ card.card_expiry | date:'m-y' }}</div>
+                    <div class="">{{ card.card_cvv }}</div>
+                    <div class="card-bank">ONLINE BANK</div>
+                </div>
+
+                <div class="controls">
+                    <form method="post">
+                        {% csrf_token %}
+                        <label>
+                            Enable/Disable Card
+                            <input name="is_active" type="checkbox" id="toggle-card" {% if card.is_active %} checked {% endif %}> 
+                            
+                            <button type="submit">Save</button>
+                        </label>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="body">
+            <h2>Waiting for Approval</h2>
+            <div class="container">
+                <div class="credit-card">
+                    <div class="card-chip"></div>
+                    
+                    <div class="card-number">CARD NUMBER</div>
+                    <div class="card-name">CARD NAME</div>
+                    <div class="card-expiry">CARD EXPIRY</div>
+                    <div class="">CVV</div>
+                    <div class="card-bank">ONLINE BANK</div>
+                </div>
+                <div>
+                    <p style="color: red;">Your Card is applied and Waiting for Approval</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+    {% else %}
+    <div>
+        <p>You dont have a Debit Card Applied</p>
+    </div>
+    {% endif %}
+    
+
+
+    
+
+{% endblock %}

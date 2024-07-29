@@ -1,0 +1,38 @@
+ {% extends 'base.html' %} 
+ {% load static %}       
+         
+         {% block content %}
+         <div class="main-container">
+         <div style="margin-bottom: -40px; margin-top: -30px;">
+            <h2>Hey {{ request.user }}!</h2>
+            <h2>Welcome to Online Bank</h2>
+          </div>
+        <div class="form-container" style="width: 89%; background-color: transparent; box-shadow: none;">
+         
+            <div class="form">
+                <h2>OPEN BANK ACCOUNT</h2>
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input required type="text" placeholder="Full Name" name="full_name" id="">
+                    
+                    <input required type="tel" placeholder="Mobile Number with Country Code" name="phone_number" id="">
+
+                    <input required type="text" placeholder="Address (State, City)" name="address" id="">
+
+                    
+                    <select required name="account_type" id="">
+                        <option value="">SELECT ACCOUNT TYPE</option>
+                        <option value="Current">CURRENT</option>
+                        <option value="Islamic">ISLAMIC</option>
+                    </select>
+                       
+                    <input required placeholder="Profession" type="text" name="profession" id="">
+                        
+                        
+                    <button type="submit">Lets GO!</button>
+                </form>
+            </div>
+        </div>
+        </div>
+     {% endblock %}

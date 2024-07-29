@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Banking</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <h2><a style="color: white;" href="{% url 'core:dashboard' %}">ONLINE BANK</a></h2>
+        <div>
+            <button class="hamburger" onclick="toggleSidebar()">☰</button>
+            <p>Hey <a href="" style="color: royalblue;">{{ request.user.username }}!</a></p>
+        </div>
+    </div>
+    <div class="container">
+        {% if request.user.is_authenticated %}
+            {% if bank_account_created %}
+            <nav class="sidebar">
+                <ul class="sidebar-links">
+                    
+                    <li {% block home_active %}{% endblock %}><a href="{% url 'core:dashboard' %}"><i class="fas fa-home"></i> Overview</a></li>
+
+                    <li {% block requestMoney_active %}{% endblock %}><a href="{% url 'transaction:request_money' %}"><i class="fas fa-exchange-alt"></i> Request Money</a></li>
+
+                    <li {% block requests_active %}{% endblock %}><a href="{% url 'transaction:all_requests' bank_account.account_number %}"><i class="fas fa-exchange-alt"></i> All Requests</a></li>
+                    
+                    <li {% block limit_manage_active %}{% endblock %}><a href="{% url 'transaction:limit_management' bank_account.account_number %}"><i class="fas fa-exchange-alt"></i> Limit Management</a></li>
+                    
+                    <li {% block card_active %}{% endblock %}><a href="{% url 'transaction:manage_card' bank_account.account_number %}"><i class="fas fa-credit-card"></i> Cards</a></li>
+                    
+                    <li {% block trx_history_active %}{% endblock %}><a href="{% url 'transaction:transaction_history' bank_account.account_number %}"><i class="fas fa-history"></i> Transaction History</a></li>
+                    
+                    <li {% block acc_setting_active %}{% endblock %}><a href="#"><i class="fas fa-cog"></i> Account Settings</a></li>
+                    
+                    <li {% block noti_active %}{% endblock %}><a href="{% url 'core:notifications' bank_account.account_number %}"><i class="fas fa-bell"></i> Notifications</a></li>
+                    
+                    <li {% block support_active %}{% endblock %}><a href="{% url 'core:all_issues' %}"><i class="fas fa-question-circle"></i> Customer Support</a></li>
+                    
+                    <li {% block user_profile_active %}{% endblock %}><a href="{% url 'bankaccount:user_profile' request.user %}"><i class="fas fa-user"></i>User Profile</a></li>
+                    
+                    {% if request.user.is_authenticated %}
+                    
+                    <li><a style="color: red;" href="{% url 'account_logout' %}"><i class="fas fa-sign-in-alt" ></i> Logout</a></li>
+                    {% else %}
+                    
+                    <li><a href="{% url 'account_signup' %}"><i class="fas fa-sign-in-alt"></i> Login/Signup</a></li>
+                    
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% endif %}
+        <main class="content">
+            {% if messages %}
+            <div class="msg-container">
+                {% for msg in messages %}
+                <p class="{% if msg.tags == 'success' %}success{% elif msg.tags == 'error' %}error{% endif %} msg">{{ msg }}</p>
+                {% endfor %}
+            </div> 
+            {% endif %}
+            
+            {% block content %}
+            {% endblock content %}
+        </main>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <!-- Your JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to hide the message container
+        function hideMessages() {
+            const msgContainer = document.querySelector('.msg-container');
+            if (msgContainer) {
+                msgContainer.style.display = 'none';
+            }
+        }
+
+        // Set a timeout to hide the message container after 5 seconds (5000 milliseconds)
+        setTimeout(hideMessages, 5000);
+    });
+</script>
+</body>
+</html>

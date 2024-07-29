@@ -1,0 +1,33 @@
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Added job "reset_daily_limits_job" to job store "default"
+Added job "reset_monthly_limits_job" to job store "default"
+Added job "reset_yearly_limits_job" to job store "default"
+Scheduler started
+Looking for jobs to run
+Running job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 12:59:33 PKT)" (scheduled at 2024-07-15 13:01:18.518158+05:00)
+Job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 13:01:23 PKT)" executed successfully
+Next wakeup is due at 2024-07-15 13:01:23.518158+05:00 (in 4.066845 seconds)
+Looking for jobs to run
+Running job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 13:01:28 PKT)" (scheduled at 2024-07-15 13:01:23.518158+05:00)
+Job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 13:01:28 PKT)" executed successfully
+Next wakeup is due at 2024-07-15 13:01:28.518158+05:00 (in 4.971786 seconds)
+Looking for jobs to run
+Running job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 13:01:33 PKT)" (scheduled at 2024-07-15 13:01:28.518158+05:00)
+Job "reset_monthly_limits_job (trigger: interval[0:00:05], next run at: 2024-07-15 13:01:33 PKT)" executed successfully
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Adding job tentatively -- it will be properly scheduled when the scheduler starts
+Added job "reset_daily_limits_job" to job store "default"
+Added job "reset_monthly_limits_job" to job store "default"
+Added job "reset_yearly_limits_job" to job store "default"
+Scheduler started
+Looking for jobs to run
+Next wakeup is due at 2024-07-30 21:55:56.799747+05:00 (in 86390.416821 seconds)

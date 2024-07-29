@@ -1,0 +1,21 @@
+ {% extends 'base.html' %} 
+ {% load static %}       
+         
+         {% block content %}
+            <div class="form-container">
+               
+                <div class="form">
+                    <h2>Change Email</h2>
+                    <form method="post">
+
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        
+                    
+                       
+
+                        <button type="submit">Change Email</button>
+                    </form>
+                </div>
+            </div>
+     {% endblock %}

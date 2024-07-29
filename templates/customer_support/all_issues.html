@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block requests_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+<style>
+  
+
+    .btns > a:first-child{
+        color: rgb(15, 158, 15);
+    }
+
+    .btns > a:hover{
+        text-decoration: underline;
+    }
+
+    .btns > a:last-child{
+        margin-left: 20px;
+        color: rgb(255, 22, 22);
+    }
+
+
+</style>
+    
+    <div class="dashboard-container">
+        <div class="transaction-history">
+            <h2>All Issues</h2>
+          
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue ID</th>
+                        <th>Message</th>
+                        <th>Is Resolved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in issues %}
+                    <tr>
+                        <td><a href="{% url 'core:issue_detail' item.id %}">{{ item.id }}</a></td>
+                        <td>{{ item.content | slice:"0:200" }}</td>
+
+                        {% if item.resolved_at is None %}
+                        <td>Not Resolved</td>
+                        {% else %}
+                        <td>Resolved</td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+
+                    <tr>
+                        <td>
+                            No Issues Reported
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+   
+                </tbody>
+            </table>
+        </div>
+
+  
+    </div>
+
+{% endblock %}

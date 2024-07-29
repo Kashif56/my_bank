@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block limit_manage_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="balance-transfer-container">
+            <div class="sub-container">
+                <div class="account-balance">
+                    <div class="balance-title">Account Balance</div>
+                    <div class="balance-amount">PKR {{ bank_account.balance }}</div>
+                </div>
+                <div class="btn-tabs">
+                    <a class="transfer-button" href="{% url 'transaction:make_payment' bank_account.account_number %}">Transfer</a>
+                    <a class="transfer-button request-btn" href="">Request</a>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div>
+                    <div class="balance-title">Full Name</div>
+                    <div class="balance-amount">{{ bank_account.full_name }}</div>
+                </div>
+                <div>
+                    <div class="balance-title">Account Number</div>
+                    <div class="balance-amount">{{ bank_account.account_number }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="limit-management">
+            <h2>LIMIT MANAGEMENT</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="limit-item">
+                    <label for="dailyLimit">Daily Limit</label>
+                    <input type="range" name="daily_limit" min="0" max="50000" value="{{ bank_account.daily_limit }}" class="slider" id="dailyLimit">
+                    <div class="limit-values">
+                        <span class="total-limit">Total Limit: PKR <span id="dailyLimitValue">{{ bank_account.daily_limit | intcomma }}</span></span>
+                        <span class="remaining-limit">Remaining Limit: PKR <span id="dailyRemainingValue">{{ bank_account.daily_remaining_limit | intcomma }}</span></span>
+                    </div>
+                </div>
+                <div class="limit-item">
+                    <label for="monthlyLimit">Monthly Limit</label>
+                    <input type="range" name="monthly_limit" min="0" max="{{ bank_account.max_monthly_limit }}" value="{{ bank_account.monthly_limit }}" class="slider" id="monthlyLimit">
+                    <div class="limit-values">
+                        <span class="total-limit">Total Limit: PKR <span id="monthlyLimitValue">{{ bank_account.monthly_limit | intcomma }}</span></span>
+                        <span class="remaining-limit">Remaining Limit: PKR <span id="monthlyRemainingValue">{{ bank_account.monthly_remaining_limit | intcomma }}</span></span>
+                    </div>
+                </div>
+                <div class="limit-item">
+                    <label for="yearlyLimit">Yearly Limit</label>
+                    <input type="range" name="yearly_limit" min="0" max="{{ bank_account.max_yearly_limit }}" value="{{ bank_account.yearly_limit }}" class="slider" id="yearlyLimit">
+                    <div class="limit-values">
+                        <span class="total-limit">Total Limit: PKR <span id="yearlyLimitValue">{{ bank_account.yearly_limit | intcomma }}</span></span>
+                        <span class="remaining-limit">Remaining Limit: PKR <span id="yearlyRemainingValue">{{ bank_account.yearly_remaining_limit | intcomma }}</span></span>
+                    </div>
+                </div>
+            <button class="save-button">Save</button>
+        </form>
+        </div>
+    </div>
+
+{% endblock %}

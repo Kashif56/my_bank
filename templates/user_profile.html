@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block acc_setting_active %}
+class="active-link"
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <h1 style="text-align: center;">User Profile</h1>
+        <div class="transaction-history user-profile">
+            
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>{{request.user.username}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+                
+                
+            
+            </table>
+
+            
+            <section>
+                <a href="{% url 'account_change_password' %}">Change Password</a>
+                <a href="{% url 'account_email' %}">Change Email</a>
+                <a href="{% url 'account_reset_password' %}">Reset Password</a>
+              
+            </section>
+              
+         
+        </div>
+    </div>
+
+{% endblock %}

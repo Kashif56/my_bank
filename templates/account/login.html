@@ -1,0 +1,21 @@
+ {% extends 'base.html' %} 
+ {% load static %}       
+         
+         {% block content %}
+            <div class="form-container">
+                <div class="tabs">
+                    <a class="tab signup-tab" href="{% url 'account_signup' %}">SIGNUP</a>
+                    <a class="tab login-tab active" href="{% url 'account_login' %}">LOGIN</a>
+                </div>
+                <div class="form">
+                    <h2>LOGIN</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        
+                     
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+     {% endblock %}

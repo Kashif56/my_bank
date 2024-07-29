@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block payment_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="balance-transfer-container">
+            <div class="sub-container">
+                <div class="account-balance">
+                    <div class="balance-title">Account Balance</div>
+                    <div class="balance-amount">PKR {{ bank_account.balance }}</div>
+                </div>
+                <div class="btn-tabs">
+                    <a class="transfer-button" href="{% url 'transaction:make_payment' bank_account.account_number %}">Transfer</a>
+                    <a class="transfer-button request-btn" href="">Request</a>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div>
+                    <div class="balance-title">Full Name</div>
+                    <div class="balance-amount">{{ bank_account.full_name }}</div>
+                </div>
+                <div>
+                    <div class="balance-title">Account Number</div>
+                    <div class="balance-amount">{{ bank_account.account_number }}</div>
+                </div>
+            </div>
+        </div>
+        <div class='form-container'>
+            <div class="form">
+                <h2>Make Payment</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-with-button">
+                        <input {% if request_item %} value="{{ request_item.request_from.account_number }}" {% endif %} type="number" name="to_acc" placeholder="Account Number">
+                        <button type="button" class="verify-button">Verify</button>
+                    </div>
+                
+                    <input type="number" value="{{ request_item.amount }}" name='amount' placeholder="Amount">
+                    
+                    <button type="submit">Transfer</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

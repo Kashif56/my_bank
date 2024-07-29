@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block noti_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="transaction-history">
+            <h2>Notifications</h2>
+          
+            <table>
+                <tbody>
+                    {% for item in qs %}
+                    <tr>
+                        <td>{{ item.content | slice:"0:100" }}</td>
+                        <td>{{ item.timestamp | timesince }} Ago</td>
+                     
+                    </tr>
+                    {% empty %}
+                   
+                    <tr>
+                        <td style="text-align: center;" colspan="6">No Notifications</td>
+                    </tr>
+                    {% endfor %}
+   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

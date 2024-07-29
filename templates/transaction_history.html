@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block trx_history_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="transaction-history trx-history">
+            <h2>Transaction History</h2>
+            <div class="transaction-total">
+                <section>
+                    <p class="credit">Credit Amount</p>
+                    <p>PKR {{ credit_total }}</p>
+                </section>
+                <section>
+                    <p class="debit">Debit Amount</p>
+                    <p>PKR {{ debit_total }}</p>
+                </section>
+                
+                
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S#</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Transaction Type</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in trx_history %}
+                    {% if item.from_acc == bank_account or item.to_acc == bank_account %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ item.from_acc.full_name }}</td>
+                        <td>{{ item.to_acc.full_name }}</td>
+                        
+                        {% if item.to_acc == bank_account %}
+                        <td>Credit</td>
+                        {% else %}
+                        <td>{{ item.trx_type }}</td> {% endif %}
+                        
+                        <td>{{ item.trx_id }}</td>
+                        <td class="{% if item.to_acc == bank_account %}credit{% else %}debit{% endif %}">PKR {{ item.amount | intcomma }}</td>
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                    <tr>
+                        <td style="text-align: center;" colspan="6">No Transaction Recorded</td>
+                    </tr>
+                    {% endfor %}
+   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

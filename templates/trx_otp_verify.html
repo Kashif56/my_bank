@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block payment_active %}
+class="active-link"
+{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+
+.payment-success{
+   box-shadow: 2px 2px 20px 2px rgba(0, 0, 0, 0.344);
+    width: 62%;
+    margin: 10px auto;
+}
+
+table tr td:first-child{
+    width: 50% !important;
+    
+}
+
+
+
+
+</style>
+    <div class="dashboard-container">
+     
+        <div class='form-container'>
+            <div class="payment-success">
+                <div>
+                    <h2>VERIFY OTP</h2>
+                </div>
+                <table>
+                    <tr>
+                        <td>Receiver</td>
+                        <td>{{ item.to_acc.full_name }} - {{ item.to_acc.account_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>Amount</td>
+                        <td>PKR {{ item.amount }}</td>
+                    </tr>
+                    <tr>
+                        <td>Datetime</td>
+                        <td>{{ item.timestamp }}</td>
+                    </tr>
+                </table>
+    
+              
+                
+            </div>
+            <div class="form">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <p>We have sent you an OTP your Email Address Please Enter OTP to continue.</p>
+                
+                    <input type="text" name='otp_code' placeholder="OTP">
+                    
+                    <button type="submit">Verify and Transfer</button>
+                </form>
+            </div>
+        </div>
+
+        
+        
+    </div>
+
+{% endblock %}

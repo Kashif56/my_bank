@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="balance-transfer-container">
+            <div class="sub-container">
+                <div class="account-balance">
+                    <div class="balance-title">Account Balance</div>
+                    <div class="balance-amount">PKR {{ bank_account.balance }}</div>
+                </div>
+                <div class="btn-tabs">
+                    <a class="transfer-button" href="{% url 'transaction:make_payment' bank_account.account_number %}">Transfer</a>
+                    <a class="transfer-button request-btn" href="">Request</a>
+                </div>
+            </div>
+            <div class="sub-container">
+                <div>
+                    <div class="balance-title">Full Name</div>
+                    <div class="balance-amount">{{ bank_account.full_name }}</div>
+                </div>
+                <div>
+                    <div class="balance-title">Account Number</div>
+                    <div class="balance-amount">{{ bank_account.account_number }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="payment-success">
+            <div>
+                <h2>Request Detail</h2>
+            </div>
+            <table>
+                <tr>
+                    <td>Request ID</td>
+                    <td>{{ item.id }}</td>
+                </tr>
+                <tr>
+                    <td class="first-td">Sender</td>
+                    <td class="forth-td">{{ item.request_from.full_name }} - {{ item.request_from.account_number }}</td>
+                </tr>
+                <tr>
+                    <td>Receiver</td>
+                    <td>{{ item.request_to.full_name }} - {{ item.request_to.account_number }}</td>
+                </tr>
+                <tr>
+                    <td>Amount</td>
+                    <td>PKR {{ item.amount }}</td>
+                </tr>
+                <tr>
+                    <td>Request Date</td>
+                    <td>{{ item.requested_at }}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{% if item.is_accepted == True %} Request Accepted {% else %} Not Accepted {% endif %}</td>
+                </tr>
+       
+            </table>
+            <br>
+            <a href="">Take Screenshot</a>
+            
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block acc_setting_active %}
+class="active-link"
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="transaction-history account-page">
+                <h1>Bank Account Settings</h1>
+                <form method="POST" id="account-settings-form">
+                    <div class="form-group">
+                        <label for="account-type">Account Type</label>
+                        <select id="account-type" name="account-type">
+                            <option value="current">Current Account</option>
+                            <option value="savings">Savings Account</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-notifications">Do you want to receive notifications via Email:</label>
+                        <input type="radio" id="email-notifications" value="1" name="email-notifications"> Yes
+                        <input type="radio" name="email-notifications" value="0" id="email-notifications"> No
+                    </div>
+                    <button type="submit" id="save-button">Save</button>
+                </form>
+         
+        </div>
+    </div>
+
+{% endblock %}
