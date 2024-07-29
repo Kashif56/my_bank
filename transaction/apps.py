@@ -1,4 +1,3 @@
-
 from django.apps import AppConfig
 import logging
 
@@ -9,8 +8,4 @@ class TransactionConfig(AppConfig):
     name = 'transaction'
 
     def ready(self):
-        from django.core.management import call_command
-        try:
-            call_command('schedule_jobs')
-        except Exception as e:
-            logger.error(f"Failed to start scheduler: {e}")
+        import transaction.signals  # Import signals to connect them
