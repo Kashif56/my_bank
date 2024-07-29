@@ -18,8 +18,8 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = ['http://www.mybank.up.railway.app', '127.0.0.1','localhost', 'https://www.mybank.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['https://*.up.railway.app','https://*.up.railway.app/admin']
+ALLOWED_HOSTS = ['*' ,'http://www.mybank.up.railway.app', 'mybank.up.railway.app' ,'127.0.0.1','localhost', 'https://www.mybank.up.railway.app']
+CSRF_TRUSTED_ORIGINS=['https://*.up.railway.app','https://*.up.railway.app/admin', 'http://www.mybank.up.railway.app']
 
 
 # Application definition
