@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn online_bank.wsgi
+web: python manage.py migrate && gunicorn online_bank.wsgi:application
